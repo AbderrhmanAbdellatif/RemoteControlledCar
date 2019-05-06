@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Client</string>
+    <string name="ileri"></string>
+    <string name="geri"></string>
+    <string name="sag"></string>
+    <string name="sol"></string>
+    <string name="dur"></string>
+    <string name="textView"></string>
+</resources>
