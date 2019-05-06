@@ -67,12 +67,16 @@ public class Server{
     	            out3.low();
 			}
                 else if(message!=null && message.equals("Geri")){
+					Server.Display("Geri");
+
                     out0.low();
 		    out4.low();
 		    out2.high();
     	            out3.high();
                 }
 		else if(message!=null && message.equals("Sag")){
+								Server.Display("sag");
+
                     out0.low();
 		    out2.low();
     	            out3.low();
@@ -82,6 +86,8 @@ public class Server{
 		    
                 }
 		else if(message!=null && message.equals("Sol")){
+											Server.Display("Sol");
+
 		    out4.low();
 		    out2.low();
     	            out3.low();
@@ -98,6 +104,8 @@ public class Server{
 		    out0.low();
                 }
 		else if(message!=null && message.equals("Dur")){
+														Server.Display("Dur");
+
 		    out4.low();
 		    out2.low();
     	     	    out3.low();
