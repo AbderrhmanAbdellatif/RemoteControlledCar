@@ -44,16 +44,16 @@ public class Server{
                 Server.serverSocket = new ServerSocket(Server.port);
                 
                 while (true) {
-                Server.Display("Client Bekleniyor...");
+                Server.Display("Client Bekleniyor!!");
 
                 Socket clientSocket = Server.serverSocket.accept();
 
-                Server.Display("Client Geldi...");
+                Server.Display("Client Geldi...(:");
 
                 ObjectOutputStream sOutput = new ObjectOutputStream(clientSocket.getOutputStream());
                 ObjectInputStream sInput = new ObjectInputStream(clientSocket.getInputStream());
 
-                sOutput.writeObject("Server:Hosgeldin");
+                sOutput.writeObject("Server:welcome");
                 
                 String message = sInput.readObject().toString(); 
                 //Server.Display();
@@ -77,7 +77,7 @@ public class Server{
 		    out2.low();
     	            out3.low();
 		    out4.high();
-		    Thread.sleep(500);
+		    Thread.sleep(600);
 		    out4.low();
 		    
                 }
@@ -86,7 +86,7 @@ public class Server{
 		    out2.low();
     	            out3.low();
 	 	    out0.high();
-		    Thread.sleep(500);
+		    Thread.sleep(600);
 		    out0.low();
                 }
 		else if(message!=null && message.equals("360")){
@@ -94,7 +94,7 @@ public class Server{
 		    out2.low();
     	            out3.low();
 	 	    out0.high();
-		    Thread.sleep(1750);
+		    Thread.sleep(1600);
 		    out0.low();
                 }
 		else if(message!=null && message.equals("Dur")){
