@@ -25,12 +25,12 @@ public class Client {
 
     public static void Start(String ip, int port,String message) {
         MainActivity m = new MainActivity();
-        MainActivity.text.setText("Connected to server");
+        MainActivity.text.setText("Connected to server!"); 
         try {
             // Client Soket nesnesi
 
             if( (Client.socket = new Socket(ip, port))!=null ){
-                Client.Display("Connected to server");
+                Client.Display("Connected to server!");
                 Client.sInput = new ObjectInputStream(Client.socket.getInputStream());
                 // output stream
                 Client.sOutput = new ObjectOutputStream(Client.socket.getOutputStream());
@@ -42,7 +42,7 @@ public class Client {
                 socket.close();
 
             }else{
-                MainActivity.text.setText("Unable to connect to server");
+                MainActivity.text.setText("Unable to connect to server !");
             }
             //Client.socket = new Socket(ip, port);
 
