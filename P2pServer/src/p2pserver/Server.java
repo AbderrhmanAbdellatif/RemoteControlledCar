@@ -1,11 +1,5 @@
 package p2pserver;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
@@ -31,20 +25,17 @@ public class Server {
     GpioPinDigitalOutput out4 = null ;*/
 
     public static void Start(int openport) {
-        final GpioController gpio = GpioFactory.getInstance(); //pinleri tanımlama 
+       //Kullanilacak 4 pini tanimla
+        final GpioController gpio = GpioFactory.getInstance();
         final GpioPinDigitalOutput out0 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, PinState.LOW);
         final GpioPinDigitalOutput out2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, PinState.LOW);
         final GpioPinDigitalOutput out3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, PinState.LOW);
         final GpioPinDigitalOutput out4 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, PinState.LOW);
-//
-//    final GpioPinDigitalOutput out0 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_19, PinState.LOW);
-//    final GpioPinDigitalOutput out2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_26, PinState.LOW);
-//    final GpioPinDigitalOutput out3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_21, PinState.LOW);
-//    final GpioPinDigitalOutput out4 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_20, PinState.LOW);
+
 
         try {
             Server.port = openport;
-            // serversoket nesnesi
+
             Server.serverSocket = new ServerSocket(Server.port);
             Server.Display("Client Bekleniyor...");
 
@@ -57,7 +48,7 @@ public class Server {
                 ObjectOutputStream sOutput = new ObjectOutputStream(clientSocket.getOutputStream());
                 ObjectInputStream sInput = new ObjectInputStream(clientSocket.getInputStream());
 
-                sOutput.writeObject("Server:Hosgeldin");
+                sOutput.writeObject("Server:Merhabalar");
 
                 String message = sInput.readObject().toString();
                 //Server.Display();
@@ -65,10 +56,10 @@ public class Server {
                 if (message != null && message.equals("İleri")) {
                     Server.Display("ileri");
 
-                    out0.high();
-                    out4.high();
+                    out0.high(); //ileri sol tekerlik aktif olacak
+                    out4.high(); //ileri sag tekerlik aktif olacak
 
-                    out2.low();
+                    out2.low(); 
                     out3.low();
 
                 } else if (message != null && message.equals("Geri")) {
@@ -119,9 +110,9 @@ public class Server {
         }
     }
 
-    public static void Display(String msg) {
+    public static void Display(String msg) { 
 
-        System.out.println(msg);
+        System.out.println(msg); 
 
     }
 
