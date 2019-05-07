@@ -93,6 +93,7 @@ public class Server {
                     Thread.sleep(1750);
                     out0.low();
                 } else if (message != null && message.equals("Dur")) {
+                    Server.Display("Dur");
                     out4.low();
                     out2.low();
                     out3.low();
