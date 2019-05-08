@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Button conn;
     EditText ipT;
     EditText portT;
+    Button kapat;
    public static  EditText sansor;
 
     public static TextView text;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         ipT = (EditText) findViewById(R.id.ipText);
         portT = (EditText) findViewById(R.id.portText);
         sansor =(EditText) findViewById(R.id.sansor);
+        kapat =(Button) findViewById(R.id.kapat);
         MyTask mt = new MyTask();
         mt.execute();
 
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     try{
                         Client.Start(ip, port,message);
                         text.setText("Connected to server");
+                        conn.setEnabled(false);
                     }catch (ExceptionInInitializerError ex){
                         text.setText("Unable to connect to server");
                     }
@@ -126,6 +129,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View arg0) {
                     message = "Dur";
+                    Client.Start(ip, port,message);
+                }
+            });
+            kapat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    message = "kapat";
                     Client.Start(ip, port,message);
                 }
             });
