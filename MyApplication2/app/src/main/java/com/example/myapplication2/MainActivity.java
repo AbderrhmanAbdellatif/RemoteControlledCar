@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Button conn;
     EditText ipT;
     EditText portT;
-
+   public static  EditText sansor;
 
     public static TextView text;
 
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         text = (TextView)findViewById(R.id.textView);
         ipT = (EditText) findViewById(R.id.ipText);
         portT = (EditText) findViewById(R.id.portText);
-
+        sansor =(EditText) findViewById(R.id.sansor);
         MyTask mt = new MyTask();
         mt.execute();
 
@@ -95,22 +95,12 @@ public class MainActivity extends AppCompatActivity {
 
                     message = "İleri";
                     Client.Start(ip, port,message);
-
-                    /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                            context);
-                    //message = messageBox.getText().toString();
-                    Client.Start(ip, port,message);
-                    alertDialogBuilder.setTitle(message);
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-                    alertDialog.show();*/
-
-                }
+                   }
             });
 
             back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    //text.setText();
                     message = "Geri";
                     Client.Start(ip, port,message);
                 }
@@ -119,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
             sag.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    //text.setText("Geri gidiyor");
                     message = "Sag";
                     Client.Start(ip, port,message);
                 }
@@ -128,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
             sol.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    //text.setText("Geri gidiyor");
                     message = "Sol";
                     Client.Start(ip, port,message);
                 }
@@ -137,20 +125,13 @@ public class MainActivity extends AppCompatActivity {
             dur.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    //text.setText("Geri gidiyor");
                     message = "Dur";
                     Client.Start(ip, port,message);
                 }
             });
 
-            /*sol360.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View arg0) {
-                    //text.setText("Geri gidiyor");
-                    message = "360";
-                    Client.Start(ip, port,message);
-                }
-            });*/
+
+
 
 
             return null;
