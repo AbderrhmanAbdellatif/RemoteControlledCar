@@ -30,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
     EditText ipT;
     EditText portT;
     Button kapat;
-   public static  EditText sansor;
-
+    public static  EditText sansor;
     public static TextView text;
 
     private Socket s;
@@ -113,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
                     Client.Start(ip, port,message);
                 }
             });
-
             sag.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
@@ -121,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
                     Client.Start(ip, port,message);
                 }
             });
-
             sol.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
