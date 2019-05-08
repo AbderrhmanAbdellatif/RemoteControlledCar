@@ -19,10 +19,6 @@ public class Server {
     public static ServerSocket serverSocket;
     // Serverin dileyeceği port
     public static int port = 0;
-  /*GpioPinDigitalOutput out0 =null ;
-    GpioPinDigitalOutput out2 =null ;
-    GpioPinDigitalOutput out3 =null ;
-    GpioPinDigitalOutput out4 =null ;*/
 
     public static void Start(int openport) {
        //Kullanilacak 4 pinin tanimlanmasi
