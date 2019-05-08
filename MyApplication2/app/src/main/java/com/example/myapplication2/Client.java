@@ -30,7 +30,6 @@ public class Client {
                 Client.sOutput = new ObjectOutputStream(Client.socket.getOutputStream());
                 Client.Display(Client.sInput.readObject().toString());
                 Client.sOutput.writeObject(message);
-                MainActivity.sansor.setText(Client.sInput.readObject().toString());
                 sOutput.flush();
                 sOutput.close();
                 socket.close();

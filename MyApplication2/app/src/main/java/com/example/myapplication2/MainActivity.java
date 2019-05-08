@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     try{
                         Client.Start(ip, port,message);
                         text.setText("Connected to server");
+                        sansor.setText(message);
                         conn.setEnabled(false);
                     }catch (ExceptionInInitializerError ex){
                         text.setText("Unable to connect to server");
