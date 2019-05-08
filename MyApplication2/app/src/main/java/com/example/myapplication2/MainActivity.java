@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.burak_000.client.R;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -67,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         kapat =(Button) findViewById(R.id.kapat);
         MyTask mt = new MyTask();
         mt.execute();
-
     }
 
     class MyTask extends AsyncTask<Void,Void,Void> {
@@ -84,10 +84,14 @@ public class MainActivity extends AppCompatActivity {
                     try{
                         Client.Start(ip, port,message);
                         text.setText("Connected to server");
-                        sansor.setText(message);
+                        sansor.setText(Client.sInput.readObject().toString());
                         conn.setEnabled(false);
                     }catch (ExceptionInInitializerError ex){
                         text.setText("Unable to connect to server");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
 
                 }
