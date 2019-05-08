@@ -5,5 +5,5 @@
 - ŞAHİN ALÇIN
 - AYHAN ARSLAN MADEN 
 - YOUSSOF RAGHEB
-- Atahan Ata
+- ATAHAN ATA
 ```
