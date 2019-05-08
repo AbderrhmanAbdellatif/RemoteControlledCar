@@ -171,17 +171,10 @@
         android:id="@+id/sansor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_marginBottom="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
-=======
-        android:layout_marginBottom="18dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="18dp"
->>>>>>> 0b690a6c9ea2be48c14e44ef67595c26234fbdbc
         android:ems="10"
         android:hint="sensor"
         android:text=""
@@ -196,13 +189,8 @@
 
     <Button
         android:id="@+id/kapat"
-<<<<<<< HEAD
         android:layout_width="500px"
         android:layout_height="500px"
-=======
-        android:layout_width="200px"
-        android:layout_height="200px"
->>>>>>> 0b690a6c9ea2be48c14e44ef67595c26234fbdbc
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
