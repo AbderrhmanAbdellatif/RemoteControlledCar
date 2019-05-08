@@ -27,7 +27,7 @@ public class Test_Ultrasonic {
         
         while (true) {
             System.out.println("distance " + sonic.getDistance() / 10 + "cm");
-            Thread.sleep(1000); //1s
+            Thread.sleep(100); //1s
             
             if ((sonic.getDistance() / 10) < 30) {// yakin oldugu zaman mesafa hesaplama yani 30 cmden daha az ise
                 out4.low(); // pin 04 durdurmak
