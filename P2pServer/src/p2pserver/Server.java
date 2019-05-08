@@ -15,17 +15,17 @@ import java.util.logging.Logger;
 
 public class Server {
 
-    //server soketi eklemeliyiz
+    //server soketinin eklenmesi
     public static ServerSocket serverSocket;
-    // Serverın dileyeceği port
+    // Serverin dileyeceği port
     public static int port = 0;
-  /*  GpioPinDigitalOutput out0 =null ;
+  /*GpioPinDigitalOutput out0 =null ;
     GpioPinDigitalOutput out2 =null ;
     GpioPinDigitalOutput out3 =null ;
-    GpioPinDigitalOutput out4 = null ;*/
+    GpioPinDigitalOutput out4 =null ;*/
 
     public static void Start(int openport) {
-       //Kullanilacak 4 pini tanimla
+       //Kullanilacak 4 pinin tanimlanmasi
         final GpioController gpio = GpioFactory.getInstance();
         final GpioPinDigitalOutput out0 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, PinState.LOW);
         final GpioPinDigitalOutput out2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, PinState.LOW);
@@ -58,7 +58,6 @@ public class Server {
 
                     out0.high(); //ileri sol tekerlik aktif olacak
                     out4.high(); //ileri sag tekerlik aktif olacak
-
                     out2.low(); 
                     out3.low();
 
@@ -68,6 +67,7 @@ public class Server {
                     out4.low();
                     out2.high();
                     out3.high();
+                    
                 } else if (message != null && message.equals("Sag")) {
                     Server.Display("Sag");
                     out0.low();
@@ -85,6 +85,7 @@ public class Server {
                     out0.high();
                     Thread.sleep(500);
                     out0.low();
+                    
                 } else if (message != null && message.equals("360")) {
                     out4.low();
                     out2.low();
@@ -92,13 +93,13 @@ public class Server {
                     out0.high();
                     Thread.sleep(1750);
                     out0.low();
+                    
                 } else if (message != null && message.equals("Dur")) {
                     Server.Display("Dur");
                     out4.low();
                     out2.low();
                     out3.low();
                     out0.low();
-
                 }
             }
 
@@ -112,9 +113,7 @@ public class Server {
     }
 
     public static void Display(String msg) { 
-
         System.out.println(msg); 
-
     }
 
 }
