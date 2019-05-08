@@ -11,7 +11,7 @@ import com.pi4j.io.gpio.RaspiPin;
 public class Test_Ultrasonic {
 
     public static void main(String[] args) throws Exception {
-          final GpioController gpio = GpioFactory.getInstance(); //pinleri tanımlama 
+        final GpioController gpio = GpioFactory.getInstance(); //pinleri tanımlamasi 
         final GpioPinDigitalOutput out0 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, PinState.LOW);
         final GpioPinDigitalOutput out2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, PinState.LOW);
         final GpioPinDigitalOutput out3 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, PinState.LOW);
@@ -24,9 +24,11 @@ public class Test_Ultrasonic {
                 23529411 //REJECTION_TIME ; long
         );
         System.out.println("Start");
+        
         while (true) {
             System.out.println("distance " + sonic.getDistance() / 10 + "cm");
             Thread.sleep(1000); //1s
+            
             if ((sonic.getDistance() / 10) < 30) {
                 out4.low();
                 out2.low();
