@@ -29,7 +29,7 @@ public class Test_Ultrasonic {
             System.out.println("distance " + sonic.getDistance() / 10 + "cm");
             Thread.sleep(100); //1s
             
-            if ((sonic.getDistance() / 10) < 30) {// 30 cmden daha az mesafede sensorun arabayi durdurmasi icin
+            if ((sonic.getDistance() / 10) < 40) {// 30 cmden daha az mesafede sensorun arabayi durdurmasi icin
                 out4.low(); // pin 04'u durdurur
                 out2.low(); // pin 02'u durdurur
                 out3.low(); // pin 03'u durdurur 
