@@ -1,49 +1,104 @@
 package com.example.myapplication2;
 
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import static com.example.myapplication2.Client.sInput;
 
+class Listen extends Thread {
 
-/**
- *
- * @author 14mst
- */
+    public void run() {
+        //soket bağlı olduğu sürece dön
+        while (Client.socket.isConnected()) {
+            try {
+                //mesaj gelmesini bloking olarak dinyelen komut
+                Message received = (Message) (sInput.readObject());
+                //mesaj gelirse bu satıra geçer
+                //mesaj tipine göre yapılacak işlemi ayır.
+                switch (received.type) {
+
+                    case Text:
+                        MainActivity.sansor.setText(received.content.toString());
+                        break;
+
+                }
+
+            } catch (IOException ex) {
+
+                //Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                //Client.Stop();
+                break;
+            } catch (ClassNotFoundException ex) {
+              //  Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                //Client.Stop();
+                break;
+            }
+        }
+
+    }
+}
+
 public class Client {
+
     //her clientın bir soketi olmalı
     public static Socket socket;
+
     //verileri almak için gerekli nesne
     public static ObjectInputStream sInput;
     //verileri göndermek için gerekli nesne
     public static ObjectOutputStream sOutput;
-    public static void Start(String ip, int port,String message) {
-        MainActivity m = new MainActivity();
-        MainActivity.text.setText("Connected to server!"); 
+    //serverı dinleme thredi
+    public static Listen listenMe;
+
+    public static void Start(String ip, int port) {
         try {
             // Client Soket nesnesi
-            if( (Client.socket = new Socket(ip, port))!=null ){
-                Client.Display("Connected to server!");
-                Client.sInput = new ObjectInputStream(Client.socket.getInputStream());
-                // output stream
-                Client.sOutput = new ObjectOutputStream(Client.socket.getOutputStream());
-                Client.Display(Client.sInput.readObject().toString());
-                Client.sOutput.writeObject(message);
+            Client.socket = new Socket(ip, port);
+            Client.Display("Servera bağlandı");
+            // input stream
+            Client.sInput = new ObjectInputStream(Client.socket.getInputStream());
+            // output stream
+            Client.sOutput = new ObjectOutputStream(Client.socket.getOutputStream());
+            Client.listenMe = new Listen();
+            Client.listenMe.start();
 
-                sOutput.flush();
-                sOutput.close();
-                socket.close();
-            }else{
-                MainActivity.text.setText("Unable to connect to server !");
-            }
         } catch (IOException ex) {
-            Client.Display("Unable to connect to server");
-        } catch (ClassNotFoundException ex) {
-            Client.Display("Unable to connect to server");
+         //   Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void Display(String msg) {
-        System.out.println(msg);
+
+    //client durdurma fonksiyonu
+    public static void Stop() {
+        try {
+            if (Client.socket != null) {
+                Client.listenMe.stop();
+                Client.socket.close();
+                Client.sOutput.flush();
+                Client.sOutput.close();
+
+                Client.sInput.close();
+            }
+        } catch (IOException ex) {
+          //  Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
+
+    public static void Display(String msg) {
+
+        System.out.println(msg);
+
+    }
+
+    //mesaj gönderme fonksiyonu
+    public static void Send(Message msg) {
+        try {
+            Client.sOutput.writeObject(msg);
+        } catch (IOException ex) {
+          //  Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }

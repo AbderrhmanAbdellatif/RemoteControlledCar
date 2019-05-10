@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     EditText ipT;
     EditText portT;
     Button kapat;
+
     public static  EditText sansor;
     public static TextView text;
 
@@ -44,8 +45,11 @@ public class MainActivity extends AppCompatActivity {
     static int port;
     final Context context = this;
     private Button button;
+    public Thread tmr_slider;
 
 
+
+}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,11 +73,28 @@ public class MainActivity extends AppCompatActivity {
         mt.execute();
     }
 
-    class MyTask extends AsyncTask<Void,Void,Void> {
+
+        MainActivity() {
+
+
+
+            tmr_slider = new Thread(() -> {
+                //soket bağlıysa dönsün
+                while (Client.socket.isConnected()) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        // Nothing here
+                    }
+                }
+
+
+        }
+
+class MyTask extends AsyncTask<Void,Void,Void> {
 
         @Override
         protected Void doInBackground(Void... params){
-
 
             conn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,71 +103,81 @@ public class MainActivity extends AppCompatActivity {
                     ip=ipT.getText().toString();
                     port=Integer.parseInt(portT.getText().toString());
                     try{
-                        Client.Start(ip, port,message);
                         text.setText("Connected to server");
-                        sansor.setText(Client.sInput.readObject().toString());
-                        //conn.setEnabled(false);
                     }catch (ExceptionInInitializerError ex){
                         text.setText("Unable to connect to server");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
                     }
 
                 }
             });
+
             forward.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
 
-                    message = "İleri";
+                    message = "Ileri";
+                    //Client.Start(ip, port,message);
+
+                    Message msg = new Message(Message.Message_Type.Text);
+                    msg.content = message;
+                    Client.Send(msg);
+                    /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            context);
+                    //message = messageBox.getText().toString();
                     Client.Start(ip, port,message);
+                    alertDialogBuilder.setTitle(message);
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();*/
 
-
-                   }
+                }
             });
 
             back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
+                    //text.setText();
                     message = "Geri";
-                    Client.Start(ip, port,message);
-
+                    Message msg = new Message(Message.Message_Type.Text);
+                    msg.content = message;
+                    Client.Send(msg);
                 }
             });
+
             sag.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
+                    //text.setText("Geri gidiyor");
                     message = "Sag";
-                    Client.Start(ip, port,message);
+                   /// Client.Start(ip, port,message);
+                    Message msg = new Message(Message.Message_Type.Text);
+                    msg.content = message;
+                    Client.Send(msg);
                 }
             });
+
             sol.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
+                    //text.setText("Geri gidiyor");
                     message = "Sol";
-                    Client.Start(ip, port,message);
+                   // Client.Start(ip, port,message);
+                    Message msg = new Message(Message.Message_Type.Text);
+                    msg.content = message;
+                    Client.Send(msg);
                 }
             });
 
             dur.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
+                    //text.setText("Geri gidiyor");
                     message = "Dur";
-                    Client.Start(ip, port,message);
+                  //  Client.Start(ip, port,message);
+                    Message msg = new Message(Message.Message_Type.Text);
+                    msg.content = message;
+                    Client.Send(msg);
                 }
             });
-            kapat.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View arg0) {
-                    message = "kapat";
-                    Client.Start(ip, port,message);
-                }
-            });
-
-
-
 
 
 
