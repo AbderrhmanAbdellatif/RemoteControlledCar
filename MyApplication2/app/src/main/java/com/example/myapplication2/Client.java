@@ -30,6 +30,7 @@ public class Client {
                 Client.sOutput = new ObjectOutputStream(Client.socket.getOutputStream());
                 Client.Display(Client.sInput.readObject().toString());
                 Client.sOutput.writeObject(message);
+
                 sOutput.flush();
                 sOutput.close();
                 socket.close();

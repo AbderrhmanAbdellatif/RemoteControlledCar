@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params){
 
+
             conn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                         Client.Start(ip, port,message);
                         text.setText("Connected to server");
                         sansor.setText(Client.sInput.readObject().toString());
-                        conn.setEnabled(false);
+                        //conn.setEnabled(false);
                     }catch (ExceptionInInitializerError ex){
                         text.setText("Unable to connect to server");
                     } catch (IOException e) {
@@ -95,13 +96,14 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-
             forward.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
 
                     message = "İleri";
                     Client.Start(ip, port,message);
+
+
                    }
             });
 
@@ -110,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View arg0) {
                     message = "Geri";
                     Client.Start(ip, port,message);
+
                 }
             });
             sag.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
                     Client.Start(ip, port,message);
                 }
             });
+
+
 
 
 
