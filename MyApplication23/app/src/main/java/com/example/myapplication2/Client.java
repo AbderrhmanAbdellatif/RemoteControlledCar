@@ -4,32 +4,35 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import static com.example.myapplication2.Client.sInput;
- class Listen extends Thread {
+class Listen extends Thread {
+
 
     public void run() {
         //soket bağlı olduğu sürece dön
         while (Client.socket.isConnected()) {
             try {
                 //mesaj gelmesini bloking olarak dinyelen komut
-                Message received = (Message) (sInput.readObject());
-                //mesaj gelirse bu satıra geçer
-                //mesaj tipine göre yapılacak işlemi ayır.
-                switch (received.type) {
 
-                    case Text:
-                        MainActivity.sensor.setText(received.content.toString());
-                        break;
+                Thread.sleep(5000);
 
-                }
-
+              Client.received = Client.sInput.readObject().toString();
+              
             } catch (IOException ex) {
 
                 //Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                 //Client.Stop();
                 break;
-            } catch (ClassNotFoundException ex) {
+
+
+           } catch (ClassNotFoundException ex) {
               //  Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+              //Client.Stop();
+
+                break;
+            }
+
+            catch (InterruptedException  ex) {
+                //  Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                 //Client.Stop();
                 break;
             }
@@ -39,7 +42,7 @@ import static com.example.myapplication2.Client.sInput;
 }
 
 public class Client {
-
+    public static   String received ="";
     //her clientın bir soketi olmalı
     public static Socket socket;
 
@@ -63,7 +66,7 @@ public class Client {
             Client.listenMe.start();
 
         } catch (IOException ex) {
-         //   Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            //   Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -79,7 +82,7 @@ public class Client {
                 Client.sInput.close();
             }
         } catch (IOException ex) {
-          //  Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            //  Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -95,7 +98,9 @@ public class Client {
         try {
             Client.sOutput.writeObject(msg);
         } catch (IOException ex) {
-          //  Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+         //   MainActivity.text.setText(ex.getMessage());
+
+
         }
 
     }

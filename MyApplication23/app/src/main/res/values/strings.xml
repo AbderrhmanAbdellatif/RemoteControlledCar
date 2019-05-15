@@ -1,11 +1,9 @@
 <resources>
-    <string name="app_name">Araba</string>
+    <string name="app_name">Client</string>
     <string name="ileri"></string>
     <string name="geri"></string>
     <string name="sag"></string>
     <string name="sol"></string>
     <string name="dur"></string>
     <string name="textView"></string>
-    <string name="sensor"></string>
-    <string name="kapat"></string>
 </resources>

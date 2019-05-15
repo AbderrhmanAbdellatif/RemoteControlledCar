@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     Button conn;
     EditText ipT;
     EditText portT;
-    public static  EditText sensor;
 
     public static TextView text;
 
@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         text = (TextView)findViewById(R.id.textView);
         ipT = (EditText) findViewById(R.id.ipText);
         portT = (EditText) findViewById(R.id.portText);
-        sensor =(EditText) findViewById(R.id.sensor);
         MyTask mt = new MyTask();
         mt.execute();
 
@@ -74,15 +73,25 @@ public class MainActivity extends AppCompatActivity {
             conn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    message = "b";
                     ip=ipT.getText().toString();
                     port=Integer.parseInt(portT.getText().toString());
                     try{
-                         Client.Start(ip, port);
-                        text.setText("Connected to server");
+                        Client.Start(ip, port);
+                        conn.setEnabled(false);
+
+//                        message = "Start";
+//
+//                        try {
+//                            Client.sOutput.writeObject(message);
+//                        } catch (IOException ex) {
+//                            //   MainActivity.text.setText(ex.getMessage());
+//                        }
+
+                        //text.setText("Connected to server");
                     }catch (ExceptionInInitializerError ex){
                         text.setText("Unable to connect to server");
                     }
+
 
                 }
             });
@@ -91,10 +100,18 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View arg0) {
 
-                    message = "Ileri";
-                    Message msg = new Message(Message.Message_Type.Text);
-                    msg.content = message;
-                    Client.Send(msg);
+                        message = "Ileri";
+
+                        try {
+                            Client.sOutput.writeObject(message);
+                            text.setText(Client.received);
+
+                        } catch (IOException ex) {
+                            //   MainActivity.text.setText(ex.getMessage());
+                        }
+
+
+
 
                 }
             });
@@ -102,10 +119,14 @@ public class MainActivity extends AppCompatActivity {
             back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    message = "Back";
-                    Message msg = new Message(Message.Message_Type.Text);
-                    msg.content = message;
-                    Client.Send(msg);
+                    message = "Geri";
+                    try {
+                        Client.sOutput.writeObject(message);
+                        text.setText(Client.received);
+
+                    } catch (IOException ex) {
+                        //   MainActivity.text.setText(ex.getMessage());
+                    }
                 }
             });
 
@@ -113,9 +134,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View arg0) {
                     message = "Sag";
-                    Message msg = new Message(Message.Message_Type.Text);
-                    msg.content = message;
-                    Client.Send(msg);
+                    try {
+                        Client.sOutput.writeObject(message);
+                        text.setText(Client.received);
+
+                    } catch (IOException ex) {
+                        //   MainActivity.text.setText(ex.getMessage());
+                    }
                 }
             });
 
@@ -124,9 +149,13 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View arg0) {
 
                     message = "Sol";
-                    Message msg = new Message(Message.Message_Type.Text);
-                    msg.content = message;
-                    Client.Send(msg);
+                    try {
+                        Client.sOutput.writeObject(message);
+                        text.setText(Client.received);
+
+                    } catch (IOException ex) {
+                        //   MainActivity.text.setText(ex.getMessage());
+                    }
 
                 }
             });
@@ -135,11 +164,15 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View arg0) {
                     message = "Dur";
-                    Message msg = new Message(Message.Message_Type.Text);
-                    msg.content = message;
-                    Client.Send(msg);
+                    try {
+                        Client.sOutput.writeObject(message);
+                        text.setText(Client.received);
 
-                   }
+                    } catch (IOException ex) {
+                        //   MainActivity.text.setText(ex.getMessage());
+                    }
+
+                }
             });
 
 
